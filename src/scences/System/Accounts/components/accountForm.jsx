@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Dialog, DialogTitle, DialogContent, TextField, DialogActions, Button } from '@mui/material';
+import { Dialog, DialogTitle, DialogContent, TextField, InputLabel, DialogActions, Button } from '@mui/material';
 
-const AccountForm = ({ open, handleClose }) => {
+const AccountForm = ({ open, handleClose, saveAccount }) => {
     const [accountInfo, setAccountInfo] = useState({
-        name: '',
+        username: '',
+        password: '',
         birthYear: '',
         phone: '',
         email: ''
@@ -18,26 +19,38 @@ const AccountForm = ({ open, handleClose }) => {
     };
 
     const handleSubmit = () => {
-        // Gửi dữ liệu thông tin tài khoản lên server hoặc xử lý theo nhu cầu của ứng dụng
         console.log(accountInfo);
+        saveAccount(accountInfo); // Lưu tài khoản vào danh sách
         handleClose();
     };
 
     return (
         <Dialog open={open} onClose={handleClose}>
-            <DialogTitle>Thông tin tài khoản</DialogTitle>
+            <DialogTitle>Thêm tài khoản</DialogTitle>
             <DialogContent>
                 <TextField
-                    label="Tên"
+                    label="Tên tài khoản"
                     variant="outlined"
                     fullWidth
                     margin="normal"
-                    name="name"
-                    value={accountInfo.name}
+                    name="username"
+                    value={accountInfo.username}
                     onChange={handleChange}
                 />
                 <TextField
-                    label="Năm sinh"
+                    label="Mật khẩu"
+                    type="password"
+                    variant="outlined"
+                    fullWidth
+                    margin="normal"
+                    name="password"
+                    value={accountInfo.password}
+                    onChange={handleChange}
+                />
+                <InputLabel htmlFor="birthYear">Năm sinh</InputLabel>
+                <TextField
+                    id="birthYear"
+                    type="date"
                     variant="outlined"
                     fullWidth
                     margin="normal"
@@ -47,6 +60,7 @@ const AccountForm = ({ open, handleClose }) => {
                 />
                 <TextField
                     label="Số điện thoại"
+                    type="tel"
                     variant="outlined"
                     fullWidth
                     margin="normal"
@@ -62,6 +76,8 @@ const AccountForm = ({ open, handleClose }) => {
                     name="email"
                     value={accountInfo.email}
                     onChange={handleChange}
+                    error={!accountInfo.email.endsWith('@gmail.com')}
+                    helperText={!accountInfo.email.endsWith('@gmail.com') ? "Email phải có đuôi @gmail.com" : ""}
                 />
             </DialogContent>
             <DialogActions>
