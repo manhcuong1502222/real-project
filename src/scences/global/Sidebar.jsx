@@ -1,23 +1,21 @@
-import { useState } from "react";
-import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
+import React, { useState } from "react";
+import {
+    ProSidebar,
+    Menu,
+    MenuItem
+} from "react-pro-sidebar";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
 import "react-pro-sidebar/dist/css/styles.css";
 import { tokens } from "../../theme";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
-import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
-import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
+import WindowOutlinedIcon from "@mui/icons-material/WindowOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
-import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
-import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
-import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
-import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutlined";
-import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
-import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
-import WindowOutlinedIcon from '@mui/icons-material/WindowOutlined';
 import TvOutlinedIcon from '@mui/icons-material/TvOutlined';
+import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
+import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
+
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
     const theme = useTheme();
@@ -42,6 +40,15 @@ const Sidebar = () => {
     const colors = tokens(theme.palette.mode);
     const [isCollapsed, setIsCollapsed] = useState(false);
     const [selected, setSelected] = useState("Dashboard");
+    const [openAccountInfo, setOpenAccountInfo] = useState(false);
+
+    const handleOpenAccountInfo = () => {
+        setOpenAccountInfo(true);
+    };
+
+    const handleCloseAccountInfo = () => {
+        setOpenAccountInfo(false);
+    };
 
     return (
         <Box
@@ -65,7 +72,6 @@ const Sidebar = () => {
         >
             <ProSidebar collapsed={isCollapsed}>
                 <Menu iconShape="square">
-                    {/* LOGO AND MENU ICON */}
                     <MenuItem
                         onClick={() => setIsCollapsed(!isCollapsed)}
                         icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
@@ -162,7 +168,6 @@ const Sidebar = () => {
                             setSelected={setSelected}
                         />
 
-
                         <Typography
                             variant="h5"
                             color={colors.grey[300]}
@@ -177,6 +182,7 @@ const Sidebar = () => {
                             selected={selected}
                             setSelected={setSelected}
                         />
+
                         <Item
                             title="Màn hình"
                             to="/man-hinh"
@@ -192,11 +198,10 @@ const Sidebar = () => {
                             setSelected={setSelected}
                         />
 
-
                     </Box>
-
                 </Menu>
             </ProSidebar>
+
         </Box>
     );
 };

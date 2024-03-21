@@ -7,12 +7,14 @@ import Topbar from "./scences/global/Topbar";
 import Sidebar from "./scences/global/Sidebar";
 
 import Dashboard from "./scences/dashboard";
-// import Acounts from "./scences/global/accounts";
-// import Team from "./scences/global/team";
-// import A from "./scences/global/a";
-// import B from "./scences/global/b";
-// import C from "./scences/global/c";
-
+import Accounts from "./scences/System/Accounts";
+import Screen from "./scences/System/Screen";
+import FAQ from "./scences/System/FAQ";
+import Customer from "./scences/Function/customer";
+import Receipts from "./scences/Function/receipts";
+import Report from "./scences/Function/report";
+import Debt from "./scences/Function/debt";
+import Bill from "./scences/Function/bill";
 
 function App() {
 
@@ -31,11 +33,14 @@ function App() {
 
               <Routes>
                 <Route path="/" element={<Dashboard />} />
-                {/* <Route path="/accounts" element={<Acounts />} />
-                <Route path="/team" element={<Team />} />
-                <Route path="/a" element={<A />} />
-                <Route path="/b" element={<B />} />
-                <Route path="/c" element={<C />} /> */}
+                <Route path="/tai-khoan" element={<Accounts />} />
+                <Route path="/man-hinh" element={<Screen />} />
+                <Route path="/nhom-quyen" element={<FAQ />} />
+                <Route path="/hoa-don" element={<Bill />} />
+                <Route path="/phieu-thu" element={<Receipts />} />
+                <Route path="/cong-no" element={<Debt />} />
+                <Route path="/bao-cao" element={<Report />} />
+                <Route path="/khach-hang" element={<Customer />} />
               </Routes>
 
             </main>
