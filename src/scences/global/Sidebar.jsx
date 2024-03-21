@@ -16,6 +16,8 @@ import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutl
 import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
+import WindowOutlinedIcon from '@mui/icons-material/WindowOutlined';
+import TvOutlinedIcon from '@mui/icons-material/TvOutlined';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
     const theme = useTheme();
@@ -115,6 +117,81 @@ const Sidebar = () => {
                             selected={selected}
                             setSelected={setSelected}
                         />
+
+                        <Typography
+                            variant="h5"
+                            color={colors.grey[300]}
+                            sx={{ m: "15px 0 5px 20px" }}
+                        >
+                            CHỨC NĂNG
+                        </Typography>
+                        <Item
+                            title="Khách hàng"
+                            to="/khach-hang"
+                            icon={<PeopleOutlinedIcon />}
+                            selected={selected}
+                            setSelected={setSelected}
+                        />
+                        <Item
+                            title="Báo cáo"
+                            to="/bao-cao"
+                            icon={<WindowOutlinedIcon />}
+                            selected={selected}
+                            setSelected={setSelected}
+                        />
+                        <Item
+                            title="Công nợ"
+                            to="/cong-no"
+                            icon={<WindowOutlinedIcon />}
+                            selected={selected}
+                            setSelected={setSelected}
+                        />
+                        <Item
+                            title="Phiếu thu"
+                            to="/phieu-thu"
+                            icon={<WindowOutlinedIcon />}
+                            selected={selected}
+                            setSelected={setSelected}
+                        />
+
+                        <Item
+                            title="Hóa đơn"
+                            to="/hoa-don"
+                            icon={<WindowOutlinedIcon />}
+                            selected={selected}
+                            setSelected={setSelected}
+                        />
+
+
+                        <Typography
+                            variant="h5"
+                            color={colors.grey[300]}
+                            sx={{ m: "15px 0 5px 20px" }}
+                        >
+                            HỆ THỐNG
+                        </Typography>
+                        <Item
+                            title="Tài khoản"
+                            to="/tai-khoan"
+                            icon={<PersonOutlinedIcon />}
+                            selected={selected}
+                            setSelected={setSelected}
+                        />
+                        <Item
+                            title="Màn hình"
+                            to="/man-hinh"
+                            icon={<TvOutlinedIcon />}
+                            selected={selected}
+                            setSelected={setSelected}
+                        />
+                        <Item
+                            title="Nhóm quyền"
+                            to="/nhom-quyen"
+                            icon={<HelpOutlineOutlinedIcon />}
+                            selected={selected}
+                            setSelected={setSelected}
+                        />
+
 
                     </Box>
 
