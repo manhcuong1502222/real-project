@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Dialog, DialogTitle, DialogContent, TextField, InputLabel, DialogActions, Button } from '@mui/material';
+import { Dialog, DialogTitle, DialogContent, TextField, InputLabel, DialogActions, Button, Alert } from '@mui/material';
 
 const AccountForm = ({ open, handleClose, saveAccount }) => {
     const [accountInfo, setAccountInfo] = useState({
@@ -10,6 +10,8 @@ const AccountForm = ({ open, handleClose, saveAccount }) => {
         email: ''
     });
 
+    const [showEmptyFieldAlert, setShowEmptyFieldAlert] = useState(false);
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setAccountInfo(prevState => ({
@@ -19,8 +21,16 @@ const AccountForm = ({ open, handleClose, saveAccount }) => {
     };
 
     const handleSubmit = () => {
+
+        const isEmptyField = Object.values(accountInfo).some(value => value.trim() === '');
+
+        if (isEmptyField) {
+            setShowEmptyFieldAlert(true);
+            return;
+        }
+
         console.log(accountInfo);
-        saveAccount(accountInfo); // Lưu tài khoản vào danh sách
+        saveAccount(accountInfo);
         handleClose();
     };
 
@@ -67,6 +77,7 @@ const AccountForm = ({ open, handleClose, saveAccount }) => {
                     name="phone"
                     value={accountInfo.phone}
                     onChange={handleChange}
+                    inputProps={{ inputMode: 'numeric' }}
                 />
                 <TextField
                     label="Email"
@@ -79,6 +90,11 @@ const AccountForm = ({ open, handleClose, saveAccount }) => {
                     error={!accountInfo.email.endsWith('@gmail.com')}
                     helperText={!accountInfo.email.endsWith('@gmail.com') ? "Email phải có đuôi @gmail.com" : ""}
                 />
+                {showEmptyFieldAlert && (
+                    <Alert severity="error" onClose={() => setShowEmptyFieldAlert(false)}>
+                        Vui lòng điền đầy đủ thông tin
+                    </Alert>
+                )}
             </DialogContent>
             <DialogActions>
                 <Button onClick={handleClose}>Hủy</Button>

@@ -1,6 +1,7 @@
-// File: Accounts.js
+// Accounts.js
 import React, { useState } from 'react';
 import { Button, Col, Layout, Row, Space, Typography } from 'antd';
+
 import AccountForm from './components/accountForm';
 import AccountList from './components/accountsList';
 
@@ -8,8 +9,8 @@ const { Content } = Layout;
 const { Title } = Typography;
 
 const Accounts = () => {
-    const [showAccountForm, setShowAccountForm] = useState(false); // State để kiểm soát việc hiển thị AccountForm
-    const [accounts, setAccounts] = useState([]); // State để lưu danh sách các tài khoản
+    const [showAccountForm, setShowAccountForm] = useState(false);
+    const [accounts, setAccounts] = useState([]);
 
     const handleOpenAccountForm = () => {
         setShowAccountForm(true);
@@ -20,38 +21,47 @@ const Accounts = () => {
     };
 
     const saveAccount = (account) => {
-        setAccounts(prevAccounts => [...prevAccounts, account]); // Thêm tài khoản mới vào danh sách
+        setAccounts(prevAccounts => [...prevAccounts, account]);
+    };
+
+    const handleDeleteAccount = (index) => {
+        const updatedAccounts = [...accounts];
+        updatedAccounts.splice(index, 1);
+        setAccounts(updatedAccounts);
+    };
+
+    const handleEditAccount = (index, updatedAccount) => {
+        const updatedAccounts = [...accounts];
+        updatedAccounts[index] = updatedAccount;
+        setAccounts(updatedAccounts);
     };
 
     return (
         <Content className='a'>
             <div className='b'>
-                <Row gutter={[12, 12]} className='tw-mb-4'>
-                    <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-                        <Title level={3}>Danh sách tài khoản</Title>
+                <Row justify="space-between" align="middle" className='c'>
+                    <Col>
+                        <Title level={3} style={{ marginLeft: '20px', fontWeight: 'bold' }}>Danh sách tài khoản</Title>
                     </Col>
-                    <Col span={24} md={{ span: 12 }} lg={{ span: 16 }}>
-                        <Space
-                            align='center'
-                            className='tw-w-full tw-justify-end'
-                            style={{ marginTop: '20px', textAlign: 'right' }}
-                        >
+                    <Col>
+                        <Space>
                             <Button
                                 title='Tạo mới tài khoản'
                                 type='primary'
-                                className='tw-bg-primary'
-                                onClick={handleOpenAccountForm} // Gọi hàm khi nhấn nút "Tạo mới tài khoản"
+                                className='d'
+                                onClick={handleOpenAccountForm}
+                                style={{ marginRight: '20px' }}
                             >
                                 Tạo mới
                             </Button>
                         </Space>
                     </Col>
                 </Row>
-                <div className='tw-flex-1'>
-                    <AccountList accounts={accounts} /> {/* Truyền danh sách tài khoản vào AccountList */}
+                <div className='e'>
+                    <AccountList accounts={accounts} onDelete={handleDeleteAccount} onEdit={handleEditAccount} />
                 </div>
             </div>
-            <AccountForm open={showAccountForm} handleClose={handleCloseAccountForm} saveAccount={saveAccount} /> {/* Truyền state và hàm xuống AccountForm */}
+            <AccountForm open={showAccountForm} handleClose={handleCloseAccountForm} saveAccount={saveAccount} />
         </Content>
     );
 }

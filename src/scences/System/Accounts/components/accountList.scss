@@ -1,0 +1,72 @@
+.account-table-container {
+    padding: 20px;
+    background-color: #f7f7f7;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    overflow-x: auto;
+}
+
+.account-table {
+    background-color: #fff;
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    width: 100%;
+}
+
+.account-table th,
+.account-table td {
+    padding: 12px 8px;
+    text-align: center;
+}
+
+.account-table th {
+    font-weight: bold;
+}
+
+.account-table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.account-table tbody tr:hover {
+    background-color: #e0e0e0;
+}
+
+// edit button
+.account-table tbody tr td button.edit-button {
+    background-color: #260dcc;
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin-right: 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s; //  hover effect
+}
+
+.account-table tbody tr td button.edit-button:hover {
+    background-color: #6565f3;
+}
+
+// delete button
+.account-table tbody tr td button.delete-button {
+    background-color: #f44336;
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s; //  hover effect
+}
+
+.account-table tbody tr td button.delete-button:hover {
+    background-color: #d32f2f;
+}
