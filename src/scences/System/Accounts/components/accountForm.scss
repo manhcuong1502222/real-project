@@ -1,0 +1,41 @@
+.account-form {
+    .ant-modal-header {
+        background-color: #1890ff;
+        color: #fff;
+        border-bottom: none;
+    }
+
+    .ant-modal-title {
+        color: #fff;
+    }
+
+    .ant-modal-content {
+        border-radius: 8px;
+    }
+
+    .ant-modal-footer {
+        border-top: none;
+    }
+
+    .ant-btn {
+        border-radius: 4px;
+    }
+
+    .ant-form-item-label {
+        font-weight: bold;
+    }
+
+    .ant-input {
+        border-radius: 4px;
+    }
+
+    .ant-picker {
+        border-radius: 4px;
+        width: 100%;
+    }
+
+    .ant-alert {
+        border-radius: 4px;
+        margin-top: 10px;
+    }
+}

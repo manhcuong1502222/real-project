@@ -1,106 +1,80 @@
 import React, { useState } from 'react';
-import { Dialog, DialogTitle, DialogContent, TextField, InputLabel, DialogActions, Button, Alert } from '@mui/material';
+import { Modal, Button, Form, Input, DatePicker, Alert } from 'antd';
+import './accountForm.scss';
 
 const AccountForm = ({ open, handleClose, saveAccount }) => {
-    const [accountInfo, setAccountInfo] = useState({
-        username: '',
-        password: '',
-        birthYear: '',
-        phone: '',
-        email: ''
-    });
-
+    const [form] = Form.useForm();
     const [showEmptyFieldAlert, setShowEmptyFieldAlert] = useState(false);
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setAccountInfo(prevState => ({
-            ...prevState,
-            [name]: value
-        }));
-    };
-
-    const handleSubmit = () => {
-
-        const isEmptyField = Object.values(accountInfo).some(value => value.trim() === '');
-
-        if (isEmptyField) {
+    const onFinish = (values) => {
+        if (!values.email || !values.email.endsWith('@gmail.com')) {
             setShowEmptyFieldAlert(true);
             return;
         }
-
-        console.log(accountInfo);
-        saveAccount(accountInfo);
+        saveAccount(values);
         handleClose();
+        form.resetFields();
     };
 
     return (
-        <Dialog open={open} onClose={handleClose}>
-            <DialogTitle>Thêm tài khoản</DialogTitle>
-            <DialogContent>
-                <TextField
+        <Modal
+            className="account-modal" // Thêm className này để kết nối với SCSS
+            title="Thêm tài khoản"
+            visible={open}
+            onCancel={handleClose}
+            footer={[
+                <Button key="cancel" onClick={handleClose}>
+                    Hủy
+                </Button>,
+                <Button key="submit" type="primary" onClick={() => form.submit()}>
+                    Lưu
+                </Button>,
+            ]}
+        >
+            <Form form={form} onFinish={onFinish}>
+                <Form.Item
                     label="Tên tài khoản"
-                    variant="outlined"
-                    fullWidth
-                    margin="normal"
                     name="username"
-                    value={accountInfo.username}
-                    onChange={handleChange}
-                />
-                <TextField
+                    rules={[{ required: true, message: 'Vui lòng nhập tên tài khoản!' }]}
+                >
+                    <Input />
+                </Form.Item>
+                <Form.Item
                     label="Mật khẩu"
-                    type="password"
-                    variant="outlined"
-                    fullWidth
-                    margin="normal"
                     name="password"
-                    value={accountInfo.password}
-                    onChange={handleChange}
-                />
-                <InputLabel htmlFor="birthYear">Năm sinh</InputLabel>
-                <TextField
-                    id="birthYear"
-                    type="date"
-                    variant="outlined"
-                    fullWidth
-                    margin="normal"
+                    rules={[{ required: true, message: 'Vui lòng nhập mật khẩu!' }]}
+                >
+                    <Input.Password />
+                </Form.Item>
+                <Form.Item
+                    label="Năm sinh"
                     name="birthYear"
-                    value={accountInfo.birthYear}
-                    onChange={handleChange}
-                />
-                <TextField
+                    rules={[{ required: true, message: 'Vui lòng chọn năm sinh!' }]}
+                >
+                    <DatePicker picker="date" style={{ width: '100%' }} />
+                </Form.Item>
+                <Form.Item
                     label="Số điện thoại"
-                    type="tel"
-                    variant="outlined"
-                    fullWidth
-                    margin="normal"
                     name="phone"
-                    value={accountInfo.phone}
-                    onChange={handleChange}
-                    inputProps={{ inputMode: 'numeric' }}
-                />
-                <TextField
+                    rules={[{ required: true, message: 'Vui lòng nhập số điện thoại!' }]}
+                >
+                    <Input />
+                </Form.Item>
+                <Form.Item
                     label="Email"
-                    variant="outlined"
-                    fullWidth
-                    margin="normal"
                     name="email"
-                    value={accountInfo.email}
-                    onChange={handleChange}
-                    error={!accountInfo.email.endsWith('@gmail.com')}
-                    helperText={!accountInfo.email.endsWith('@gmail.com') ? "Email phải có đuôi @gmail.com" : ""}
-                />
+                    rules={[
+                        { required: true, message: 'Vui lòng nhập email!' },
+                        { type: 'email', message: 'Email không hợp lệ!' },
+                    ]}
+                >
+                    <Input />
+                </Form.Item>
                 {showEmptyFieldAlert && (
-                    <Alert severity="error" onClose={() => setShowEmptyFieldAlert(false)}>
-                        Vui lòng điền đầy đủ thông tin
-                    </Alert>
+                    <Alert message="Email phải có đuôi @gmail.com" type="error" showIcon />
                 )}
-            </DialogContent>
-            <DialogActions>
-                <Button onClick={handleClose}>Hủy</Button>
-                <Button onClick={handleSubmit} variant="contained" color="primary">Lưu</Button>
-            </DialogActions>
-        </Dialog>
+            </Form>
+        </Modal>
     );
 };
 

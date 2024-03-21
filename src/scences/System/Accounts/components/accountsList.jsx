@@ -1,8 +1,9 @@
 import React from 'react';
-import Table from 'react-bootstrap/Table';
+import { Table, Button } from 'antd';
 import './accountList.scss';
 
 const AccountList = ({ accounts, onDelete, onEdit }) => {
+
     const handleDelete = (index) => {
         onDelete(index);
     };
@@ -11,35 +12,53 @@ const AccountList = ({ accounts, onDelete, onEdit }) => {
         onEdit(index);
     };
 
+    const columns = [
+        {
+            title: 'STT', // Tiêu đề cột số thứ tự
+            dataIndex: 'index', // Đặt dataIndex là 'index' để truy cập chỉ số trong dữ liệu
+            key: 'index',
+            render: (text, record, index) => index + 1 // Sử dụng render để hiển thị số thứ tự
+        },
+        {
+            title: 'Tên tài khoản',
+            dataIndex: 'username',
+            key: 'username',
+        },
+        {
+            title: 'Mật khẩu',
+            dataIndex: 'password',
+            key: 'password',
+        },
+        {
+            title: 'Năm sinh',
+            dataIndex: 'birthYear',
+            key: 'birthYear',
+        },
+        {
+            title: 'Số điện thoại',
+            dataIndex: 'phone',
+            key: 'phone',
+        },
+        {
+            title: 'Email',
+            dataIndex: 'email',
+            key: 'email',
+        },
+        {
+            title: 'Thao tác',
+            key: 'action',
+            render: (text, record, index) => (
+                <span>
+                    <Button className="edit-button" type="primary" onClick={() => handleEdit(index)}>Chỉnh sửa</Button>
+                    <Button className="delete-button" type="danger" onClick={() => handleDelete(index)}>Xóa</Button>
+                </span>
+            ),
+        },
+    ];
+
     return (
         <div className="account-table-container">
-            <Table bordered responsive className="account-table">
-                <thead className="thead-dark">
-                    <tr>
-                        <th>Tên tài khoản</th>
-                        <th>Mật khẩu</th>
-                        <th>Năm sinh</th>
-                        <th>Số điện thoại</th>
-                        <th>Email</th>
-                        <th>Thao tác</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {accounts.map((account, index) => (
-                        <tr key={index}>
-                            <td>{account.username}</td>
-                            <td>{account.password}</td>
-                            <td>{account.birthYear}</td>
-                            <td>{account.phone}</td>
-                            <td>{account.email}</td>
-                            <td>
-                                <button className="edit-button" onClick={() => handleEdit(index)}>Chỉnh sửa</button>
-                                <button className="delete-button" onClick={() => handleDelete(index)}>Xóa</button>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </Table>
+            <Table columns={columns} dataSource={accounts.map((record, index) => ({ ...record, index }))} bordered />
         </div>
     );
 };
