@@ -18,7 +18,7 @@ const AccountForm = ({ open, handleClose, saveAccount }) => {
 
     return (
         <Modal
-            className="account-modal" // Thêm className này để kết nối với SCSS
+            className="account-modal"
             title="Thêm tài khoản"
             visible={open}
             onCancel={handleClose}

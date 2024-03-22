@@ -14,10 +14,10 @@ const AccountList = ({ accounts, onDelete, onEdit }) => {
 
     const columns = [
         {
-            title: 'STT', // Tiêu đề cột số thứ tự
-            dataIndex: 'index', // Đặt dataIndex là 'index' để truy cập chỉ số trong dữ liệu
+            title: 'STT',
+            dataIndex: 'index',
             key: 'index',
-            render: (text, record, index) => index + 1 // Sử dụng render để hiển thị số thứ tự
+            render: (text, record, index) => index + 1
         },
         {
             title: 'Tên tài khoản',

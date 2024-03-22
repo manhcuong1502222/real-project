@@ -1,4 +1,3 @@
-// Accounts.js
 import React, { useState } from 'react';
 import { Button, Col, Layout, Row, Space, Typography } from 'antd';
 
@@ -24,18 +23,6 @@ const Accounts = () => {
         setAccounts(prevAccounts => [...prevAccounts, account]);
     };
 
-    const handleDeleteAccount = (index) => {
-        const updatedAccounts = [...accounts];
-        updatedAccounts.splice(index, 1);
-        setAccounts(updatedAccounts);
-    };
-
-    const handleEditAccount = (index, updatedAccount) => {
-        const updatedAccounts = [...accounts];
-        updatedAccounts[index] = updatedAccount;
-        setAccounts(updatedAccounts);
-    };
-
     return (
         <Content className='a'>
             <div className='b'>
@@ -58,7 +45,7 @@ const Accounts = () => {
                     </Col>
                 </Row>
                 <div className='e'>
-                    <AccountList accounts={accounts} onDelete={handleDeleteAccount} onEdit={handleEditAccount} />
+                    <AccountList accounts={accounts} />
                 </div>
             </div>
             <AccountForm open={showAccountForm} handleClose={handleCloseAccountForm} saveAccount={saveAccount} />
