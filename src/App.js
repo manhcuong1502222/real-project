@@ -35,7 +35,7 @@ function App() {
                 <Route path="/" element={<Dashboard />} />
                 <Route path="/tai-khoan" element={<Accounts />} />
                 <Route path="/man-hinh" element={<Screen />} />
-                <Route path="/nhom-quyen" element={<FAQ />} />
+                <Route path="/FAQ" element={<FAQ />} />
                 <Route path="/hoa-don" element={<Bill />} />
                 <Route path="/phieu-thu" element={<Receipts />} />
                 <Route path="/cong-no" element={<Debt />} />
