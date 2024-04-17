@@ -1,15 +1,17 @@
+// Accounts.jsx
 import React, { useState } from 'react';
 import { Button, Col, Layout, Row, Space, Typography } from 'antd';
 
 import AccountForm from './components/accountForm';
 import AccountList from './components/accountsList';
+import Data from './Context/Data';
 
 const { Content } = Layout;
 const { Title } = Typography;
 
 const Accounts = () => {
     const [showAccountForm, setShowAccountForm] = useState(false);
-    const [accounts, setAccounts] = useState([]);
+    const [accounts, setAccounts] = useState(Data()); // Initialize accounts with initial data
 
     const handleOpenAccountForm = () => {
         setShowAccountForm(true);
@@ -20,7 +22,7 @@ const Accounts = () => {
     };
 
     const saveAccount = (account) => {
-        setAccounts(prevAccounts => [...prevAccounts, account]);
+        setAccounts(prevAccounts => [...prevAccounts, account]); // Update accounts state with new account
     };
 
     return (
@@ -45,7 +47,7 @@ const Accounts = () => {
                     </Col>
                 </Row>
                 <div className='e'>
-                    <AccountList accounts={accounts} />
+                    <AccountList accounts={accounts} /> {/* Pass updated accounts data */}
                 </div>
             </div>
             <AccountForm open={showAccountForm} handleClose={handleCloseAccountForm} saveAccount={saveAccount} />

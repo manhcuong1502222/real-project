@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { Dialog, DialogTitle, DialogContent, TextField, DialogActions, Button } from '@mui/material';
-import { context } from './context'
+import { ProductContext } from './context';
 
 const Screen = () => {
+    const data = useContext(ProductContext);
+    console.log(data);
+
     return (
         <div>
-            <context />
             Screen
         </div>
-    )
-
+    );
 }
 
-export default Screen; 
+export default Screen;

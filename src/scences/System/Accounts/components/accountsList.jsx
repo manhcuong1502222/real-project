@@ -1,3 +1,4 @@
+// AccountList.jsx
 import React from 'react';
 import { Table, Button } from 'antd';
 import './accountList.scss';
@@ -9,7 +10,8 @@ const AccountList = ({ accounts, onDelete, onEdit }) => {
     };
 
     const handleEdit = (index) => {
-        onEdit(index);
+        // Pass the edited account to the onEdit function
+        onEdit(accounts[index]);
     };
 
     const columns = [
@@ -49,6 +51,7 @@ const AccountList = ({ accounts, onDelete, onEdit }) => {
             key: 'action',
             render: (text, record, index) => (
                 <span>
+                    {/* Pass index to handleEdit function */}
                     <Button className="edit-button" type="primary" onClick={() => handleEdit(index)}>Chỉnh sửa</Button>
                     <Button className="delete-button" type="danger" onClick={() => handleDelete(index)}>Xóa</Button>
                 </span>
